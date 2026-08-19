@@ -4,7 +4,7 @@ Command history for the DeepSeek Harness (DSH) web GUI composer — press **↑ 
 
 DSH Web 界面输入框的命令历史插件：**↑ / ↓** 上下方向键逐一浏览此前发送的指令，回到历史末尾时恢复你编辑前的草稿。
 
-## Features / 功能 
+## Features / 功能
 
 - **↑** switches to an older sent instruction, **↓** to a newer one — the current draft is preserved underneath.
 - When you reach the newest entry and press **↓** again, the draft you were editing is restored.
