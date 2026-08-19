@@ -1,4 +1,3 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests
 name: Node.js CI
 
 on:
@@ -9,27 +8,29 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu‑latest
 
     strategy:
       matrix:
-        node-version: [22.x] # dsh只支持Node22+，删掉18、20
+        node-version: [22.x]
 
     steps:
       - uses: actions/checkout@v4
 
-      # 安装pnpm
-      - uses: pnpm/action-setup@v4
+      # 1. 先安装pnpm，这一步不能省略
+      - name: Setup pnpm
+        uses: pnpm/action‑setup@v4
         with:
           version: 9
 
+      # 2. setup‑node，cache设置为 pnpm
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup‑node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm' # ✅告诉setup‑node识别pnpm‑lock.yaml
+          cache: 'pnpm'  # ⚠️这里不能写npm
 
-      # 全部替换为pnpm命令，不要npm ci
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run build --if-present
+      # 3. pnpm严格模式安装，替代npm ci
+      - run: pnpm install --frozen‑lockfile
+      - run: pnpm run build --if‑present
       - run: pnpm test
