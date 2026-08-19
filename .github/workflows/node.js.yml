@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu‑latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -17,20 +17,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 1. 先安装pnpm，这一步不能省略
       - name: Setup pnpm
-        uses: pnpm/action‑setup@v4
+        uses: pnpm/action-setup@v4
         with:
           version: 9
 
-      # 2. setup‑node，cache设置为 pnpm
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup‑node@v4
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'  # ⚠️这里不能写npm
+          cache: 'pnpm'
 
-      # 3. pnpm严格模式安装，替代npm ci
-      - run: pnpm install --frozen‑lockfile
-      - run: pnpm run build --if‑present
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build --if-present
       - run: pnpm test
