@@ -1,7 +1,7 @@
 {
   "name": "dsh-composer-history",
-  "description": "Command history for the DeepSeek Harness web GUI composer: press Up/Down to cycle through your previously sent instructions, and reach the oldest draft again at the end of the history. 在 DSH Web 输入框中用上下方向键浏览此前发送的指令，回到历史末尾时恢复切换前的草稿。",
-  "version": "0.1.0",
+  "description": "Command history for the DeepSeek Harness GUI composer: press Up/Down to cycle through your previously sent instructions, and reach the oldest draft again at the end of the history. Works in both the official desktop app and the web profile. 在 DSH 输入框中用上下方向键浏览此前发送的指令，回到历史末尾时恢复切换前的草稿；官方桌面端与 Web profile 均可用。",
+  "version": "0.1.1",
   "license": "MIT",
   "type": "module",
   "main": "lib/index.js",

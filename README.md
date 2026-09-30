@@ -11,6 +11,7 @@ DSH Web 界面输入框的命令历史插件：**↑ / ↓** 上下方向键逐�
 - Only finished **user** messages count; system-injected reminders are skipped.
 - Multi-line drafts are safe: ↑ is taken over only on the first line, ↓ only on the last line.
 - Never triggers during IME composition, with text selected, or with Ctrl / Cmd / Alt / Shift held.
+- Works in both the official desktop app (Lexical `contenteditable` composer) and web-profile builds (`textarea` composer).
 
 ## Install / 安装
 
@@ -22,7 +23,7 @@ or in DSH settings → Plugins market, add the repository. 或在 DSH 设置 →
 
 ## Usage / 使用
 
-1. Click into the composer textarea in any session.
+1. Click into the composer in any session.
 2. Press **↑** to step back through previously sent commands; press **↓** to move forward, and once past the newest entry your original draft returns.
 3. Edit a recalled command and send it as usual.
 
@@ -31,7 +32,7 @@ or in DSH settings → Plugins market, add the repository. 或在 DSH 设置 →
 This is a standard DSH bundle:
 
 - `lib/index.js` — host half (intentionally empty; all behavior is client-side)
-- `lib/client.js` — browser half, a Cordis plugin registered via `window.__ModuleLoader__.load`; it hooks the `conversation.input.left` slot to reach the composer textarea, draft state (`props.input.draft`), the write action (`props.inputActions.setDraft`), and the session messages (`props.session.nodes`)
+- `lib/client.js` — browser half, a Cordis plugin registered via `window.__ModuleLoader__.load`; it hooks the `conversation.input.left` slot, locates the composer editor (a `textarea` in web-profile builds, the official desktop app's `[data-composer-input]` contenteditable), reads the draft through `useInput`/`inputActions`, and collects user messages from `useChat` (desktop), `session.chat` (web profile), or the older flat `session.nodes` shape
 - `cordis.patch.yml` — loader row inserting the plugin
 
 Build the npm tarball with:
